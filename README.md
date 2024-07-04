@@ -20,7 +20,7 @@ terraform/
 ```
 
 
-### Explicação dos Parâmetros
+### Explicação dos Parâmetros no `sqs.tf`
 
 - `visibility_timeout_seconds`: Tempo (em segundos) que uma mensagem ficará invisível para outros consumidores após ser recebida.
 - `message_retention_seconds`: Tempo (em segundos) que a mensagem será retida na fila.
