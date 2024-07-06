@@ -1,0 +1,8 @@
+# Arquivos do Terraform
+*.tfstate
+*.tfstate.backup
+terraform.tfstate.d/
+*.tfplan
+*.tfout
+*.terraform.lock.hcl
+*.terraform.tfstate.lock.info
