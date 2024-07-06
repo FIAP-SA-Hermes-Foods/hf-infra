@@ -1,17 +1,13 @@
-module "eks" {
-  source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = var.cluster_name
-  cluster_version = "1.21"
-  subnets         = module.vpc.private_subnets
-  vpc_id          = module.vpc.vpc_id
+resource "aws_eks_cluster" "fiap" {
+  name     = "hf-eks"
+  role_arn = var.labRole
 
-  node_groups = {
-    eks_nodes = {
-      desired_capacity = var.desired_capacity
-      max_capacity     = var.max_capacity
-      min_capacity     = var.min_capacity
+  vpc_config {
+    subnet_ids         = ["${var.subnetA}", "${var.subnetB}", "${var.subnetC}"]
+    security_group_ids = ["${var.sgId}"]
+  }
 
-      instance_type = var.node_instance_type
-    }
+  access_config {
+    authentication_mode = var.accessConfig
   }
 }
