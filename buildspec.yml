@@ -1,0 +1,38 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_DEFAULT_REGION: "us-east-1"
+    TF_VERSION: "1.0.11"
+  secrets-manager:
+    AWS_ACCESS_KEY_ID: "arn:aws:secretsmanager:us-east-1:597646754575:secret:AWS_ACCESS_KEY_ID"
+    AWS_SECRET_ACCESS_KEY: "arn:aws:secretsmanager:us-east-1:597646754575:secret:AWS_SECRET_ACCESS_KEY"
+
+phases:
+  install:
+    runtime-versions:
+      terraform: $TF_VERSION
+    commands:
+      - echo "Instalando dependências"
+      - apt-get update && apt-get install -y unzip
+      - curl -o terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip
+      - unzip terraform.zip
+      - mv terraform /usr/local/bin/
+      - terraform --version
+  pre_build:
+    commands:
+      - echo "Inicializando Terraform"
+      - terraform init
+  build:
+    commands:
+      - echo "Planejando Terraform"
+      - terraform plan -out=tfplan
+  post_build:
+    commands:
+      - echo "Aplicando Terraform"
+      - terraform apply -input=false tfplan
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
