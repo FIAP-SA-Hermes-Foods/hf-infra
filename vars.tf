@@ -1,25 +1,25 @@
 variable "labRole" {
-  default = "arn:aws:iam::597646754575:role/LabRole"
+  default = "${var.LAB_ROLE}"
 }
 
 variable "principalArn" {
-  default = "arn:aws:iam::597646754575:role/voclabs"
+  default = "${var.PRINCIPAL_ARN}"
 }
 
 variable "subnetA" {
-  default = "subnet-05e3ba1246d9bb705"
+  default = "${var.SUBNET_A}"
 }
 
 variable "subnetB" {
-  default = "subnet-0298a68e3b6e216df"
+  default = "${var.SUBNET_B}"
 }
 
 variable "subnetC" {
-  default = "subnet-0490e4be841e7e189"
+  default = "${var.SUBNET_C}"
 }
 
 variable "sgId" {
-  default = "sg-01540d5d36f08425e"
+  default = "${var.SG_ID}"
 }
 
 variable "accessConfig" {
@@ -27,7 +27,7 @@ variable "accessConfig" {
 }
 
 variable "policyArn" {
-  default = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+  default = "${var.POLICY_ARN}"
 }
 
 variable "nodeName" {
@@ -36,4 +36,8 @@ variable "nodeName" {
 
 variable "queue_name" {
   default = "my-queue" #MUDAR SE QUISER
+}
+
+variable "AWS_REGION" {
+  default = "${var.AWS_REGION}"
 }
